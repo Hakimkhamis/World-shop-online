@@ -1,0 +1,280 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100vh;
+    position: relative;
+}
+
+body {
+    margin-bottom: 50px;
+    padding-top: 70px;
+    overflow-x: hidden;
+}
+
+/* navigation */
+.navbar-inverse {
+    background-color: #31708f;
+    border-color: #31708f;
+}
+
+/* pagination */
+.pagination>li>a {
+    cursor: pointer;
+    color: #31708f;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background-color: #31708f;
+    border-color: #31708f;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: #31708f;
+    border-color: #31708f;
+}
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+    z-index: 2;
+    color: #31708f;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+/* other stuff */
+.breadcrumb {
+    border-radius: 8px;
+    border: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+}
+.badge {
+    background-color: #31708f
+}
+
+/* footer  */
+footer {
+    width: 100vw;
+    height: 50px;
+    text-align: center;
+}
+
+.copyright {
+    line-height: 50px;
+    font-weight: 700;
+}
+
+/* buttons */
+.btn-primary {
+    color: #fff;
+    background-color: #31708f;
+    border-color: #31708f;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #31708f;
+    border-color: #31708f;
+}
+
+/*  links and hr */
+a {
+    color: #31708f;
+}
+a:hover {
+    color: #31708f;
+    border-color: #31708f;
+}
+hr {
+    border-top: 1px solid #31708f;
+}
+
+
+
+
+.slide-image {
+    width: 100%;
+}
+
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
+.caption {
+    height: 130px;
+    overflow: hidden;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+.headerbanner {
+    margin-top: -20px;
+    margin-bottom: 15px;
+}.list-group {
+    padding-left: 0;
+    margin-bottom: 20px;
+    border: 1px solid #31708f;
+    border-radius: 5px;
+}
+.banner-bootom-w3-agileits,.top-products,.fandt,.top-brands,.newsletter,.footer,.content,.contact,.about,.team,.main-grid-border,.faq,.products,.collpse.tabs,.login,.check-out,.payment{
+	padding:50px 0;
+}
+.top-products h3,.features h3,.top-brands h3,.contact h3,.about h3,.team h3,h3.agileits-icons-title,.faq h3,.products h3,.login h3,.check-out h3,.payment h3{
+	font-size:40px;
+	color:#000;
+	margin-bottom:40px;
+}
+.bb-grids img{
+	width:100%;
+}
+.bb-left-agileits-w3layouts-inner{
+	background:url(../app/assets/images/bb1.jpg) no-repeat 0px 0px;
+	background-size:cover;
+	min-height:500px;
+	-moz-transition: all 1s;
+    -o-transition: all 1s;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+	width:100%;
+}
+.bb-left-agileits-w3layouts-inner:hover {
+    -moz-transform: scale3d(1.1, 1.1, 1);
+    -o-transform: scale3d(1.1, 1.1, 1);
+    -ms-transform: scale3d(1.1, 1.1, 1);
+    -webkit-transform: scale3d(1.1, 1.1, 1);
+    transform: scale3d(1.1, 1.1, 1);
+}
+.bb-middle-top{
+	background:url(../app/assets/images/bb2.jpg) no-repeat 0px 0px;
+	background-size:cover;
+	min-height:235px;
+	-moz-transition: all 1s;
+    -o-transition: all 1s;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+	width:100%;
+}
+.bb-middle-top:hover {
+    -moz-transform: scale3d(1.1, 1.1, 1);
+    -o-transform: scale3d(1.1, 1.1, 1);
+    -ms-transform: scale3d(1.1, 1.1, 1);
+    -webkit-transform: scale3d(1.1, 1.1, 1);
+    transform: scale3d(1.1, 1.1, 1);
+}
+.bb-middle-bottom{
+	background:url(../app/assets/images/bb4.jpg) no-repeat 0px 0px;
+	background-size:cover;
+	min-height:235px;
+	margin-top:30px;
+	-moz-transition: all 1s;
+    -o-transition: all 1s;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+	width:100%;
+}
+.bb-middle-bottom:hover {
+    -moz-transform: scale3d(1.1, 1.1, 1);
+    -o-transform: scale3d(1.1, 1.1, 1);
+    -ms-transform: scale3d(1.1, 1.1, 1);
+    -webkit-transform: scale3d(1.1, 1.1, 1);
+    transform: scale3d(1.1, 1.1, 1);
+}
+.bb-right-top{
+	background:url(../app/assets/images/bb3.jpg) no-repeat 0px 0px;
+	background-size:cover;
+	min-height:235px;
+	-moz-transition: all 1s;
+    -o-transition: all 1s;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+	width:100%;
+}
+.bb-right-top:hover {
+    -moz-transform: scale3d(1.1, 1.1, 1);
+    -o-transform: scale3d(1.1, 1.1, 1);
+    -ms-transform: scale3d(1.1, 1.1, 1);
+    -webkit-transform: scale3d(1.1, 1.1, 1);
+    transform: scale3d(1.1, 1.1, 1);
+}
+.bb-right-bottom{
+	background:url(../app/assets/images/bb5.jpg) no-repeat 0px 0px;
+	background-size:cover;
+	min-height:235px;
+	margin-top:30px;
+	-moz-transition: all 1s;
+    -o-transition: all 1s;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+	width:100%;
+}
+.bb-right-bottom:hover {
+    -moz-transform: scale3d(1.1, 1.1, 1);
+    -o-transform: scale3d(1.1, 1.1, 1);
+    -ms-transform: scale3d(1.1, 1.1, 1);
+    -webkit-transform: scale3d(1.1, 1.1, 1);
+    transform: scale3d(1.1, 1.1, 1);
+}
+.banner-bootom-w3-agileits h3{
+	color:#fff;
+	font-size:40px;
+	padding-top:22%;
+}
+.bb-left-agileits-w3layouts h3{
+	padding-top:41%;
+}
+.banner-bootom-w3-agileits h4{
+	color:#fff;
+	font-size:20px;
+}
+.banner-bootom-w3-agileits h4 span{
+	font-size:50px;
+	font-weight:700;
+	margin-left:10px;
+}
+/*--//banner bottom--*/
+.footer ul li {
+    font-size: 14px;
+    list-style-type: none;
+    line-height: 35px;
+}
+.footer ul li a {
+    color: #000;
+}
+.footer h4 {
+    font-size: 25px;
+    text-align: left;
+    color: #000;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+p.copy-right {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #363636;
+}
