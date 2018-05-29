@@ -4,7 +4,7 @@ require('dotenv').config();
 const router = require('express').Router();
 const MongoClient = require('mongodb').MongoClient;
 const dbURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/ecommerce';
-
+const multer = require("multer");
 const connectToDatabase = () => {
   return new Promise((resolve, reject) => {
     MongoClient.connect(dbURI, (err, db) => {
@@ -139,6 +139,27 @@ router.get('/getrelateditems', (req, res) => {
       res.status(500).send(`Error connecting to database: ${err}`);
     });
 });
+var storagedata = multer.diskStorage({ //multers disk storage settings
+      destination: function (req, file, cb) {
+          cb(null, 'client/app/assets/images/products');
+      },
+      filename: function (req, file, cb) {
+          var datetimestamp = Date.now();
+          cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
+      }
+  });
+  var upload = multer({storage: storagedata}).array("uploads", 12);
+
+router.post('/upload', function(req, res) {
+    upload(req,res,function(err){
+        console.log(req.file);
+        if(err){
+              res.json({error_code:1,err_desc:err});
+              return;
+        }
+        res.json(req.files);
+    });
+});
 
 router.post('/addreview/:id', (req, res) => {
   const id = parseInt(req.params.id);
@@ -163,9 +184,60 @@ router.post('/addreview/:id', (req, res) => {
 
 });
 
-router.get('/cart/:userId', (req, res) => {
+router.post('/addorder', (req, res) => {
+  const orderDoc = {
+    orderId: req.body.orderId,
+    items: req.body.items,
+    price: Number(req.body.price),
+    firstname:req.body.firstname,
+    lastname:req.body.lastname,
+    email:req.body.email,
+    contact:req.body.contact,
+    address:{
+      address1:req.body.address1,
+      address2:req.body.address2,
+      city:req.body.city,
+      country:req.body.country,
+      state:req.body.state,
+      zip:req.body.zip
+    },
+    date: Date.now()
+  };
+
+  connectToDatabase()
+    .then((db) => {
+      db.collection('order').insert(orderDoc , (err, doc) => {
+        if (err) {
+          return res.status(500).send(`Error saving to database with error: ${err}`);
+        }
+
+        res.send(doc);
+      })
+      db.collection('cart').remove({ userId: req.body.items.userId })
+    })
+
+});
+
+router.get('/getorder', (req, res) => {
   const userId = req.params.userId;
 
+  connectToDatabase()
+    .then((db) => {
+      db.collection('order').find({}).sort({date: -1 })
+          .toArray((err, docs) => {
+            if (err) {
+              return res.status(500).send(`Error: ${err}`);
+            }
+
+            res.json(docs);
+          })
+    }).catch((err) => {
+      res.status(500).send(`Error connecting to database: ${err}`);
+    });
+});
+
+router.get('/cart/:userId', (req, res) => {
+  const userId = req.params.userId;
   connectToDatabase()
     .then((db) => {
       db.collection('cart').findOne({ userId: userId }, (err, docs) => {
