@@ -33,7 +33,7 @@
                                    </thead>
                                    <tbody>
                                      <tr ng-repeat="item in orders" ng-if="item.status == status">
-                                       <td>{{item.orderId}}</td>
+                                       <td><a href="#" ng-click="viewOrder(item)">{{item.orderId}}</a></td>
                                        <td>{{item.date | date:'dd/MM/yyyy'}}</td>
                                        <td>{{item.firstname + ' '+item.lastname}}</td>
                                        <td>{{item.contact}}</td>
@@ -51,3 +51,88 @@
         </section>
     </section>
 </div>
+<div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Order Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label><strong>Name : </label>
+                    </div>
+                    <div class="col-md-4">
+                        <label>{{selectedOrder.firstname + ' '+selectedOrder.lastname}}</label>
+                    </div>
+                    <div class="col-md-2">
+                        <label><strong>Contact : </strong></label>
+                    </div>
+                    <div class="col-md-4">
+                        <label>{{selectedOrder.contact}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label><strong>Email : </strong></label>
+                    </div>
+                    <div class="col-md-4">
+                        <label>{{selectedOrder.email}}</label>
+                    </div>
+                    <div class="col-md-2">
+                        <label><strong>OrderID : </strong></label>
+                    </div>
+                    <div class="col-md-4">
+                        <label>#{{selectedOrder.orderId}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label><strong>Address : </strong></label>
+                    </div>
+                    <div class="col-md-10">
+                        <label>{{selectedOrder.address.address1+','+selectedOrder.address.address2+','+selectedOrder.address.city+','+selectedOrder.address.state+','+selectedOrder.address.country+','+selectedOrder.address.zip}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                        <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Image</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                
+                                <tr ng-repeat="item in selectedOrder.items.items" ng-model="cart">
+                                    <td>{{item.title}}</td>
+                                    <td class="muted center_text"><img width="100" ng-src="{{item.img_url}}"></td>
+                                    <td>{{item.quantity}}</td>
+                                    <td>{{item.price | currency}}</td>
+                                    <td>{{(item.price * item.quantity)| currency}}</td>
+                                </tr>
+                
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td><strong>{{total| currency}}</strong></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>

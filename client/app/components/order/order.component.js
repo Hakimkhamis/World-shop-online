@@ -15,6 +15,23 @@ const orderController = function($scope, databaseService, $location) {
                 loadOrders();
             });
     }
+    $scope.total = 0;
+    $scope.calculatePrice = function(){
+        if($scope.selectedOrder.items.items != undefined){
+            angular.forEach($scope.selectedOrder.items.items, function(item){
+                var subtotal = item.price * item.quantity;
+                $scope.total = $scope.total + subtotal;
+            })
+        }
+        console.log($scope.total);
+    }
+    $scope.selectedOrder = {};
+    $scope.viewOrder = function(item){
+        $scope.selectedOrder = item;
+        console.log(item);
+        $scope.calculatePrice();
+        $("#myModal").modal()
+    }
     loadOrders();
 };
 
