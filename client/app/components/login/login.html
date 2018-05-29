@@ -2,11 +2,13 @@
 <div class="log-w3">
     <div class="w3layouts-main">
         <h2>Sign In Now</h2>
-            <form action="#" method="post">
-                <input type="email" class="ggg" name="Email" placeholder="E-MAIL" required="">
-                <input type="password" class="ggg" name="Password" placeholder="PASSWORD" required="">
+        <form class="row" name="login"  novalidate>
+                <input type="text" name="username" id="password"  class="ggg" ng-model="logindata.username" placeholder="USERNAME" required="">
+                <p ng-show="login.username.$invalid && !login.username.$pristine" class="help-block">This field is required</p>
+                <input type="password" class="ggg" id="password" name="Password" ng-model="logindata.password" placeholder="PASSWORD" required="">
+                <p ng-show="login.password.$invalid && !login.password.$pristine" class="help-block">This field is required</p>
                     <div class="clearfix"></div>
-                    <input type="submit" value="Sign In" name="login">
+                    <input type="submit" ng-click="loginSubmit()"  value="Sign In" name="login">
             </form>
     </div>
 </div>
