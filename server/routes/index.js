@@ -201,6 +201,7 @@ router.post('/addorder', (req, res) => {
       state:req.body.state,
       zip:req.body.zip
     },
+    status:"open",
     date: Date.now()
   };
 
@@ -234,6 +235,31 @@ router.get('/getorder', (req, res) => {
     }).catch((err) => {
       res.status(500).send(`Error connecting to database: ${err}`);
     });
+});
+
+router.get('/order/:orderId', (req, res) => {
+  const orderId = req.params.orderId;
+  connectToDatabase()
+    .then((db) => {
+      console.log(orderId)
+     /* db.collection('order').findOne({ orderId: Number(orderId) }, (err, item) => {
+        if (err) {
+          return res.status(500).send(`Error finding document in database with error: ${err}`);
+        }
+        item.status = "close";
+        
+      })*/
+      db.collection('order').findOneAndUpdate({ orderId: Number(orderId) },
+        { $set: { status: "close" } },
+        {new: true, upsert: true}, ((err, result) => {
+          if (err) {
+            return res.status(500).send(`Error updating document in database with error: ${err}`);
+          }
+
+          res.send(result.value);
+        })
+      )
+    })
 });
 
 router.get('/cart/:userId', (req, res) => {

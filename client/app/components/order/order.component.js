@@ -1,5 +1,21 @@
 const orderController = function($scope, databaseService, $location) {
-   
+    $scope.orders = [];
+    $scope.status = "open";
+    function loadOrders() {
+        $scope.orders = [];
+        databaseService.getFromDatabase('/api/getorder')
+            .then((orders) => {
+                $scope.orders = orders;
+                console.log($scope.orders);
+            });
+    }
+    $scope.updateStatus = function(orderId){
+        databaseService.getFromDatabase('/api/order/'+orderId)
+            .then((orders) => {
+                loadOrders();
+            });
+    }
+    loadOrders();
 };
 
 angular.module('myApp')

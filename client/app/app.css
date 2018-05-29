@@ -285,7 +285,7 @@ p.copy-right {
 
 /* start admin */
 .main-body{
-   overflow-x: hidden;
+   overflow: hidden;
     background: url(../app/assets/images/bg.jpg) repeat;
     background-size:cover;
     height: 100vh;
@@ -1006,7 +1006,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     color:#fff;
    text-align: left;
 }
-.market-update-right i.fa.fa-usd {
+.market-update-right i.fa.fa-bars {
      font-size:3em;
     color:#fff;
     text-align: left;
@@ -1706,7 +1706,7 @@ section#tables  p {
 }
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
 	font-size: 0.9em;
-	color: #999;
+	color: #000;
 	border-top: none !important;
 }
 .tab-content > .active {

@@ -4,6 +4,49 @@
         <my-admin-sidebar></my-admin-sidebar>
         <section id="main-content">
             <section class="wrapper">
+               
+                    <div class="table-agile-info">
+                            <div class="panel panel-default">
+                               <div class="panel-heading">
+                                    Order List
+                               </div>
+                               <div class="row">
+                               <div class="col-md-3">
+                                   <label>Order Status</label>
+                                    <select class="form-control" ng-model="status">
+                                        <option value="open">Open</option>
+                                        <option value="close">Close</option>
+                                    </select>
+                                </div>
+                            </div>
+                                <div class="row table-responsive ">
+                                 <table class="table table-bordered table-striped table-hover">
+                                   <thead>
+                                     <tr>
+                                       <th>Order ID</th>
+                                       <th>Order Date</th>
+                                       <th>Name</th>
+                                       <th>Contact</th>
+                                       <th>Price</th>
+                                       <th>Status</th>
+                                     </tr>
+                                   </thead>
+                                   <tbody>
+                                     <tr ng-repeat="item in orders" ng-if="item.status == status">
+                                       <td>{{item.orderId}}</td>
+                                       <td>{{item.date | date:'dd/MM/yyyy'}}</td>
+                                       <td>{{item.firstname + ' '+item.lastname}}</td>
+                                       <td>{{item.contact}}</td>
+                                       <td>{{item.price | currency}}</td>
+                                       <td>
+                                           <button ng-if="item.status == 'open'" class="btn btn-xs btn-warning" ng-click="updateStatus(item.orderId)"><i class="fa fa-eye"></i></button>
+                                       </td>
+                                     </tr>
+                                   </tbody>
+                                 </table>
+                               </div>
+                             </div>
+                           </div>
             </section>
         </section>
     </section>
