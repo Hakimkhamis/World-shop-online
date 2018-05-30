@@ -1,4 +1,9 @@
-const dashboardController = function($scope, databaseService, $location) {
+const dashboardController = function($scope, databaseService, $location, $cookies) {
+    if($cookies.get("loginStatus") != undefined){
+        loadOrders();
+    }else{
+        $location.path('/admin/login');
+    }
     $scope.orders = [];
     $scope.pendingorder = 0;
     $scope.totalearning = 0;
@@ -16,7 +21,7 @@ const dashboardController = function($scope, databaseService, $location) {
             });
     }
 
-    loadOrders();
+    
 };
 
 angular.module('myApp')

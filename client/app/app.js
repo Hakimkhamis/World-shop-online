@@ -72,7 +72,7 @@ const databaseService = function($http, $q) {
     }
 };
 
-angular.module('myApp', ['ui.router'])
+angular.module('myApp', ['ui.router', 'ngCookies'])
     .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         $urlRouterProvider
             .otherwise('/');

@@ -1,4 +1,9 @@
-const orderController = function($scope, databaseService, $location) {
+const orderController = function($scope, databaseService, $location, $cookies) {
+    if($cookies.get("loginStatus") != undefined){
+        loadOrders();
+    }else{
+        $location.path('/admin/login');
+    }
     $scope.orders = [];
     $scope.status = "open";
     function loadOrders() {
@@ -12,6 +17,7 @@ const orderController = function($scope, databaseService, $location) {
     $scope.updateStatus = function(orderId){
         databaseService.getFromDatabase('/api/order/'+orderId)
             .then((orders) => {
+                alert("Status changed successfully")
                 loadOrders();
             });
     }

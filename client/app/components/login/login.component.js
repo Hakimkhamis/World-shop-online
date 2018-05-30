@@ -1,4 +1,4 @@
-const loginController = function($scope, databaseService, $location) {
+const loginController = function($scope, databaseService, $location, $cookies) {
     $scope.logindata = {
         username:"",
         password:""
@@ -6,6 +6,7 @@ const loginController = function($scope, databaseService, $location) {
 
     $scope.loginSubmit = function(){
         if($scope.logindata.username == 'admin' && $scope.logindata.password == 'admin'){
+            $cookies.put("loginStatus",true);
             $location.path('/admin/dashboard');
         }else{
             alert("Username and password is invalid");
