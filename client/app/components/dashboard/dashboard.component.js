@@ -1,10 +1,12 @@
 const dashboardController = function($scope, databaseService, $location, $cookies) {
     if($cookies.get("loginStatus") != undefined){
         loadOrders();
+        loadNumItems();
     }else{
         $location.path('/admin/login');
     }
     $scope.orders = [];
+    $scope.numItems = 0;
     $scope.pendingorder = 0;
     $scope.totalearning = 0;
     function loadOrders() {
@@ -18,6 +20,13 @@ const dashboardController = function($scope, databaseService, $location, $cookie
                         $scope.pendingorder = $scope.pendingorder + 1;
                     }
                 })
+            });
+    }
+
+    function loadNumItems() {
+        databaseService.getFromDatabase(`/api/getnumitems?currentCategory=ALL`)
+            .then((numItems) => {
+                $scope.numItems = numItems.count;
             });
     }
 

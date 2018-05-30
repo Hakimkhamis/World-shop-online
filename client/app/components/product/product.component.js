@@ -1,4 +1,4 @@
-const productController = function($scope, databaseService, $location,$cookies) {
+const productController = function($scope, databaseService, $location,$cookies, $http) {
     if($cookies.get("loginStatus") != undefined){
         
     }else{
@@ -10,8 +10,28 @@ const productController = function($scope, databaseService, $location,$cookies) 
     $scope.currentCategory = 'All';
     $scope.itemsPerPage = 5;
     $scope.numItems = 0;
+    $scope.productdata = {
+        "title" : "", 
+        "slogan" : "", 
+        "description" : "", 
+        "stars" : 0, 
+        "category" : "", 
+        "img_url" : "/app/assets/images/products/", 
+        "price" : 0
+    }
     $scope.numPages = 1;
-
+    $scope.addProduct = function(){
+        $scope.productdata = {
+            "title" : "", 
+            "slogan" : "", 
+            "description" : "", 
+            "stars" : 0, 
+            "category" : "", 
+            "img_url" : "/app/assets/images/products/", 
+            "price" : 0
+        }
+        $("#addmyModal").modal();
+    }
     function loadCategories() {
         databaseService.getFromDatabase('/api/categories')
             .then((categories) => {
@@ -58,7 +78,40 @@ const productController = function($scope, databaseService, $location,$cookies) 
         console.log(item);
         $("#myModal").modal()
     }
+    $scope.uploadFile = function(){
+        var file = $scope.myFile;
+        var fileFormData = new FormData();
+        fileFormData.append('uploads', file);
 
+        
+        $http.post('/api/upload', fileFormData, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        }).then(function(response) {
+            console.log(response.data[0].filename)
+            $scope.productdata.img_url = $scope.productdata.img_url+response.data[0].filename;
+            databaseService.postToDatabase(`/api/addproduct`,  $scope.productdata)
+            .then(() => {
+                $scope.productdata = {
+                    "title" : "", 
+                    "slogan" : "", 
+                    "description" : "", 
+                    "stars" : 0, 
+                    "category" : "", 
+                    "img_url" : "/app/assets/images/products/", 
+                    "price" : 0
+                }
+                $("#addmyModal").modal('hide');
+                loadCategories();
+                loadItems();
+                loadNumItems();
+            })
+            .catch(() => {
+                
+            });
+        })
+        
+    }
     loadCategories();
     loadItems();
     loadNumItems();
@@ -75,4 +128,18 @@ angular.module('myApp')
                 url: '/admin/product',
                 component: 'myAdminProduct'
             });
-    });
+    }).directive('fileModel', ['$parse', function ($parse) {
+        return {
+           restrict: 'A',
+           link: function(scope, element, attrs) {
+              var model = $parse(attrs.fileModel);
+              var modelSetter = model.assign;
+              
+              element.bind('change', function(){
+                 scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                 });
+              });
+           }
+        };
+     }]);

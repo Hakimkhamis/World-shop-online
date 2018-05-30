@@ -11,10 +11,13 @@
                                </div>
                                <div class="row">
                                <div class="col-md-3">
-                                   <label>Order Status</label>
+                                   <label>Product Category</label>
                                     <select class="form-control" ng-change="changeCategory(currentCategory)" ng-model="currentCategory">
                                         <option ng-repeat="category in categories" value="{{category._id}}">{{category._id}}</option>
                                     </select>
+                                </div>
+                                <div class="col-md-9 text-right">
+                                    <button class="btn btn-info" ng-click="addProduct()">Add Product</button>
                                 </div>
                             </div>
                                 <div class="row table-responsive ">
@@ -57,6 +60,77 @@
         </section>
     </section>
 </div>
+<div id="addmyModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+               
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Add Product Detail</h4>
+            </div>
+            <div class="modal-body">
+                    <form name="product" class="row" novalidate>
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="usr">Product Name: <span class="error">*</span></label>
+                                <input type="text" class="form-control" name="productname" id="productname" placeholder="Product name" ng-model="productdata.title" required>
+                                <p ng-show="product.productname.$invalid && !product.productname.$pristine" class="help-block">This field is required</p>
+                            </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="usr">Slogan : <span class="error">*</span></label>
+                                <input type="text" class="form-control" name="slogan" id="slogan" placeholder="Slogan" ng-model="productdata.slogan" required>
+                                <p ng-show="product.slogan.$invalid && !product.slogan.$pristine" class="help-block">This field is required</p>
+                            </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label for="usr">Description : <span class="error">*</span></label>
+                                <textarea class="form-control" name="description" id="description" placeholder="Description" ng-model="productdata.description" required></textarea>
+                                <p ng-show="product.description.$invalid && !product.description.$pristine" class="help-block">This field is required</p>
+                            </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="usr">Price: <span class="error">*</span></label>
+                                <input type="text" class="form-control" name="price" id="price" placeholder="Contact" ng-model="productdata.price" required>
+                                <p ng-show="product.price.$invalid && !product.price.$pristine" class="help-block">This field is required</p>
+                            </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="usr">Category : <span class="error">*</span></label>
+                                <select class="form-control" name="category" id="category" ng-model="productdata.category">
+                                    <option value="">Select</option>
+                                    <option value="Laptop">Laptop</option>
+                                    <option value="Mobile">Mobile</option>
+                                    <option value="Accessories">Accessories</option>
+                                </select>
+                                <p ng-show="product.category.$invalid && !product.category.$pristine" class="help-block">This field is required</p>
+                            </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label for="usr">Product Image: <span class="error">*</span></label>
+                                    <input type="file" file-model = "myFile"  class="form-control" name="productimage" id="productimage" placeholder="Product name" required>
+                                    <p ng-show="product.productimage.$invalid && !product.productimage.$pristine" class="help-block">This field is required</p>
+                                </div>
+                                </div>
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                        <button type="submit" ng-click="uploadFile()" class="btn btn-primary" ng-disabled="product.$invalid">product</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </form>          
+            </div>
+           
+        
+          </div>
+      
+        </div>
+      </div>
 <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
       
@@ -64,7 +138,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Order Detail</h4>
+              <h4 class="modal-title">Product Detail</h4>
             </div>
             <div class="modal-body">
                 <div class="row">

@@ -219,6 +219,30 @@ router.post('/addorder', (req, res) => {
 
 });
 
+router.post('/addproduct', (req, res) => {
+  const orderDoc = {
+    "title" : req.body.title, 
+    "slogan" : req.body.slogan, 
+    "description" : req.body.description, 
+    "stars" : req.body.stars, 
+    "category" : req.body.category, 
+    "img_url" : req.body.img_url, 
+    "price" : req.body.price
+  };
+
+  connectToDatabase()
+    .then((db) => {
+      db.collection('item').insert(orderDoc , (err, doc) => {
+        if (err) {
+          return res.status(500).send(`Error saving to database with error: ${err}`);
+        }
+
+        res.send(doc);
+      })
+    })
+
+});
+
 router.get('/getorder', (req, res) => {
   const userId = req.params.userId;
 
