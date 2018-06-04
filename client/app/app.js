@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+
 const databaseService = function($http, $q) {
     return({
         getFromDatabase: getFromDatabase,
@@ -6,7 +6,7 @@ const databaseService = function($http, $q) {
         guidHandler: guidHandler
     });
 
-    /* this function is used to get data from mongodb database */
+    
     function getFromDatabase(url) {
         const request = $http({
             method: 'get',
@@ -16,7 +16,7 @@ const databaseService = function($http, $q) {
         return (request.then(_handleSuccess, _handleError));
     }
 
-    /* this function is used to add data to mongodb database  */
+ 
     function postToDatabase(url, data) {
         const request = $http({
             method: 'post',
@@ -27,7 +27,7 @@ const databaseService = function($http, $q) {
         return (request.then(_handleSuccess, _handleError));
     }
 
-    /* this function handles creating, saving or retrieving guid */
+
     function guidHandler(action) {
         switch (action) {
         case 'create':
@@ -41,9 +41,7 @@ const databaseService = function($http, $q) {
         }
     }
 
-    /* -------------------------------
-   * Helper private methods below
-   * -------------------------------*/
+   
     function _s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
             .toString(16)
@@ -56,14 +54,11 @@ const databaseService = function($http, $q) {
     }
 
     function _handleError( response ) {
-    // The API response from the server should be returned in a
-    // normalized format. However, if the request was not handled by the
-    // server (or what not handles properly - ex. server error), then we
-    // may have to normalize it on our end, as best we can.
+    
         if (!angular.isObject( response.data ) || !response.data.message ) {
             return( $q.reject( 'An unknown error occurred.' ) );
         }
-        // Otherwise, use expected error message.
+      
         return( $q.reject( response.data.message ) );
     }
 
